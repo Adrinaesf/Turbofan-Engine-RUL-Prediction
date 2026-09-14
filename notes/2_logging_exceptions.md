@@ -15,6 +15,7 @@
     - 1.2: In components, make ``__init__.py``
         * This is because we want the components to be in the form of a package. 
         * It will have all the modules. Ex: data-ingestion, data-transformation, data-validation, ...
+        * These files are mainly for training components. 
 
     - 1.3: Make the module files. 
         * data_ingestion: Reading the data
