@@ -47,7 +47,7 @@ def error_message_detail(error: Exception, error_detail:sys):
 class CustomException(Exception):
     def __init__(self, error: Exception, error_detail:sys):
         # let the parent(Exception) store what it already knows how to store using super()
-        super().__init__(error_message)
+        super().__init__(error)
 
         # Now add extra info:
         self.error_message = error_message_detail(
