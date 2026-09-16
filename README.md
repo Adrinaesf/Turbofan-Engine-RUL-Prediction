@@ -25,8 +25,9 @@ an engine's current sensor readings, predict its Remaining Useful Life
 
 3. **Download the dataset:**
    Search "NASA CMAPSS Jet Engine Simulated Data" — it's on NASA's
-   Prognostics Data Repository and also mirrored on Kaggle. Grab at least
-   `train_FD001.txt`, and place it in `data/raw/`.
+   Prognostics Data Repository and also mirrored on Kaggle. Grab
+   `train_FD001.txt`, `test_FD001.txt`, and `RUL_FD001.txt`, and place
+   all three in `notebooks/data/`.
 
 4. **Explore the data** (open in Jupyter or VS Code's notebook viewer):
    ```
@@ -43,17 +44,25 @@ an engine's current sensor readings, predict its Remaining Useful Life
 ## Project structure
 ```
 turbofan-rul-prediction/
-├── data/
-│   └── raw/              <- put train_FD001.txt here (not tracked by git)
 ├── notebooks/
-│   └── 01_exploration.ipynb   <- start here to look at the data
+│   ├── data/                    <- put train_FD001.txt, test_FD001.txt,
+│   │                                RUL_FD001.txt here (not tracked by git)
+│   └── 01_exploration.ipynb     <- start here to look at the data
 ├── src/
-│   ├── data_loader.py    <- loading the raw file, computing RUL
+│   ├── data_loader.py    <- loading the raw files, computing RUL
 │   ├── features.py       <- which sensor columns to use as features
-│   └── train_baseline.py <- trains a Random Forest baseline and evaluates it
+│   └── train_baseline.py <- trains a Random Forest baseline, evaluates
+│                              on the official FD001 test set
 ├── requirements.txt
 └── README.md
 ```
+
+The baseline evaluates against the **official FD001 test split**: train
+on `train_FD001.txt`, predict RUL for the last recorded cycle of each
+engine in `test_FD001.txt`, and score those predictions against the
+true values in `RUL_FD001.txt`. This is the standard way this dataset
+gets evaluated, so your results are directly comparable to published
+benchmarks if you want to compare later.
 
 ## Notes / next steps
 - The baseline splits data **by engine**, not by row — this matters,
